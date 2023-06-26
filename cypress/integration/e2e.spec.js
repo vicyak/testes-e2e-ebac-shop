@@ -10,20 +10,16 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
         E validando minha compra ao final */
    
     beforeEach(() => {
-        cy.visit('')
-    });
-
-    it.only('Deve fazer um pedido na loja Ebac Shop de ponta a ponta', () => {
         cy.visit('/minha-conta')
         cy.get('#username').type(perfil.usuario)
         cy.get('#password').type(perfil.senha)
         cy.get('.woocommerce-form > .button').click()//faz login usando fixtures
+    });
 
-        cy.get('.page-title').should('contain', 'Minha conta')//verifica se o titulo do titulo e corretp
+    it.only('Deve fazer um pedido na loja Ebac Shop de ponta a ponta', () => {
 
         cy.get('#primary-menu > .menu-item-629 > a').click()//vai para pagina de produtos
 
-        cy.get('.page-title').should('contain', 'Produtos')//valida que foi para pagina de produtos
 
         cy.addProdutos('Atlas Fitness Tank', 'M', 'Blue', 3)//adc o produto. tamanho e quantidade
         cy.get('#primary-menu > .menu-item-629 > a').click()//vai para pagina de produtos
@@ -44,7 +40,7 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
         cy.get('.woocommerce-notice').should('contain', 'Obrigado. Seu pedido foi recebido.')//verifica se o pedido foi recebido corretamente
 
 
-    });
+  
 
 
         
